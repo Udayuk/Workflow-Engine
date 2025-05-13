@@ -1,14 +1,12 @@
 package com.workflow.engine.model;
 
+import com.workflow.engine.model.template.WorkflowTemplate;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Builder
@@ -21,12 +19,18 @@ public class WorkflowInstance extends Auditable {
 
     private String name;
 
+    private String description;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
     @ElementCollection
     private List<String> parameters;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
     private List<TaskInstance> tasks;
+
+    @ManyToOne
+    private WorkflowTemplate workflowTemplate;
 }

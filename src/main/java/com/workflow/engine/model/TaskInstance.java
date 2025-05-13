@@ -2,13 +2,11 @@ package com.workflow.engine.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @NoArgsConstructor
@@ -29,7 +27,9 @@ public class TaskInstance extends Auditable{
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ElementCollection
-    private List<String> dependencies;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
+    private List<TaskInstance> dependencies;
+
     private List<String> parameters;
 }

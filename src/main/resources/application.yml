@@ -2,8 +2,9 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/workflowdb
     username: postgres
-    password: password
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
