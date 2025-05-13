@@ -23,7 +23,7 @@ public class WorkflowTemplateInputDTO {
     }
 
     @Data
-    class DependencyDTO{
+    public static class DependencyDTO{
         private String from;
         private String to;
     }
